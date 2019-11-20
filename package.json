@@ -1,0 +1,157 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "move child",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "GetLocationIntent",
+                    "slots": [
+                        {
+                            "name": "roomName",
+                            "type": "def_room_names"
+                        }
+                    ],
+                    "samples": [
+                        "{roomName}"
+                    ]
+                },
+                {
+                    "name": "GetChildNameIntent",
+                    "slots": [
+                        {
+                            "name": "fname",
+                            "type": "AMAZON.FirstName"
+                        },
+                        {
+                            "name": "lname",
+                            "type": "AMAZON.FirstName"
+                        }
+                    ],
+                    "samples": [
+                        "{lname}",
+                        "{fname}",
+                        "{fname} {lname}"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "def_room_names",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "slytherine"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "hufflepuff"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "azkaban"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Hogwarts"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "dialog": {
+            "intents": [
+                {
+                    "name": "GetLocationIntent",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "roomName",
+                            "type": "def_room_names",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1025600656211.886078487009"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "GetChildNameIntent",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "fname",
+                            "type": "AMAZON.FirstName",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1483761997620.1536685659084"
+                            }
+                        },
+                        {
+                            "name": "lname",
+                            "type": "AMAZON.FirstName",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1483761997620.210470798241"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "delegationStrategy": "ALWAYS"
+        },
+        "prompts": [
+            {
+                "id": "Elicit.Slot.1025600656211.886078487009",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "tell me room's name"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1483761997620.1536685659084",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "what is the first name of the child"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1483761997620.210470798241",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "what is the last name of the child?"
+                    }
+                ]
+            }
+        ]
+    }
+}
