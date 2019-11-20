@@ -48,6 +48,20 @@
                         "{fname}",
                         "{fname} {lname}"
                     ]
+                },
+                {
+                    "name": "MoveMoreChildrenIntent",
+                    "slots": [
+                        {
+                            "name": "affirm",
+                            "type": "yesNoType"
+                        }
+                    ],
+                    "samples": [
+                        "{affirm}",
+                        "no",
+                        "yes"
+                    ]
                 }
             ],
             "types": [
@@ -56,7 +70,7 @@
                     "values": [
                         {
                             "name": {
-                                "value": "slytherine"
+                                "value": "slytherin"
                             }
                         },
                         {
@@ -72,6 +86,51 @@
                         {
                             "name": {
                                 "value": "Hogwarts"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "yesNoType",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "no thank you"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "no thanks"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "never"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "nope"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "no"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "yes please"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "yeah"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "yes"
                             }
                         }
                     ]
@@ -120,6 +179,22 @@
                             }
                         }
                     ]
+                },
+                {
+                    "name": "MoveMoreChildrenIntent",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "affirm",
+                            "type": "yesNoType",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1440706332461.1375098414161"
+                            }
+                        }
+                    ]
                 }
             ],
             "delegationStrategy": "ALWAYS"
@@ -149,6 +224,24 @@
                     {
                         "type": "PlainText",
                         "value": "what is the last name of the child?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1144368924579.438459172716",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "how many children do you want to move "
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1440706332461.1375098414161",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "please say no to stop"
                     }
                 ]
             }
