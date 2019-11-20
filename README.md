@@ -1,4 +1,4 @@
 # move_child_to_room_alexa-skill
 move child/ children from one room to other room
 
-![Flow of intents](moveCildFlow_1.jpg)
+![Flow of intents]("https://github.com/ShubhraDeshpande/move_child_to_room_alexa-skill/blob/master/moveChildFlow_1.jpg")
