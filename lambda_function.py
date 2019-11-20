@@ -35,29 +35,7 @@ class LaunchRequestHandler(AbstractRequestHandler):
                 .response
         )
 
-# class HasBirthdayLaunchRequestHandler(AbstractRequestHandler):
-#     """Handler for launch after they have set their birthday"""
 
-#     def can_handle(self, handler_input):
-#         # extract persistent attributes and check if they are all present
-#         attr = handler_input.attributes_manager.persistent_attributes
-#         attributes_are_present = ("year" in attr and "month" in attr and "day" in attr)
-
-#         return attributes_are_present and ask_utils.is_request_type("LaunchRequest")(handler_input)
-
-#     def handle(self, handler_input):
-#         attr = handler_input.attributes_manager.persistent_attributes
-#         year = attr['year']
-#         month = attr['month'] # month is a string, and we need to convert it to a month index later
-#         day = attr['day']
-
-#         # TODO:: Use the settings API to get current date and then compute how many days until user's bday
-#         # TODO:: Say happy birthday on the user's birthday
-
-#         speak_output = "Welcome back it looks like there are X more days until your y-th birthday."
-#         handler_input.response_builder.speak(speak_output)
-
-#         return handler_input.response_builder.response
 
 class GetLocationIntentHandler(AbstractRequestHandler):
     """Handler for Hello World Intent."""
@@ -76,12 +54,13 @@ class GetLocationIntentHandler(AbstractRequestHandler):
         birthday_attributes = {
             "roomName": roomName,
             
+            
         }
 
         attributes_manager.persistent_attributes = birthday_attributes
         attributes_manager.save_persistent_attributes()
         if roomName in spaces:
-            speak_output = 'great! who would you like to move in {roomName}'.format(roomName=roomName)
+            speak_output = 'great! How many children do you want to move to {roomName}'.format(roomName=roomName)
         else:
             speak_output = "oh! we do not have {roomName} at our center! Try with other room".format(roomName=roomName)
         return (
@@ -101,6 +80,7 @@ class GetChildNameIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         attr = handler_input.attributes_manager.persistent_attributes
         roomName = attr['roomName']
+        
         slots = handler_input.request_envelope.request.intent.slots
         fname = slots["fname"].value
         lname = slots["lname"].value
@@ -112,7 +92,8 @@ class GetChildNameIntentHandler(AbstractRequestHandler):
 
         birthday_attributes = {
             "roomName": roomName,
-            "spaces": spaces
+            "spaces": spaces,
+            
             
         }
 
@@ -127,6 +108,31 @@ class GetChildNameIntentHandler(AbstractRequestHandler):
         handler_input.response_builder.speak(speak_output)
 
         return handler_input.response_builder.response
+
+class GetNumberOfChildernIntentHandler(AbstractRequestHandler):
+    def can_handle(self, handler_input):
+        return ask_utils.is_intent_name("GetNumberOfChildernIntent")(handler_input)
+        
+    def handle(self, handler_input):
+        slots = handler_input.request_envelope.request.intent.slots
+        number = slots["n"].value
+        
+
+        # attributes_manager = handler_input.attributes_manager
+
+        # birthday_attributes = {
+        #     "number": number,
+            
+        # }
+
+        # attributes_manager.persistent_attributes = birthday_attributes
+        # attributes_manager.save_persistent_attributes()
+        speak_output = "cool! what is the name of first child?"
+        handler_input.response_builder.speak(speak_output)
+
+        return handler_input.response_builder.response
+    
+
 class HelpIntentHandler(AbstractRequestHandler):
     """Handler for Help Intent."""
     def can_handle(self, handler_input):
@@ -233,6 +239,7 @@ sb = CustomSkillBuilder(persistence_adapter=s3_adapter)
 sb.add_request_handler(LaunchRequestHandler())
 sb.add_request_handler(GetLocationIntentHandler())
 sb.add_request_handler(GetChildNameIntentHandler())
+sb.add_request_handler(GetNumberOfChildernIntentHandler())
 sb.add_request_handler(HelpIntentHandler())
 sb.add_request_handler(CancelOrStopIntentHandler())
 sb.add_request_handler(SessionEndedRequestHandler())
